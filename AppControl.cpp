@@ -146,10 +146,18 @@ void AppControl::focusChangeImg(FocusState current_state, FocusState next_state)
 
 void AppControl::displayWBGTInit()
 {
+    mlcd.displayJpgImageCoordinate(WBGT_TEMPERATURE_IMG_PATH, WBGT_TEMPERATURE_X_CRD, WBGT_TEMPERATURE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_ORANGEDOT_IMG_PATH, WBGT_TEMPERATURE_DOT_X_CRD, WBGT_TEMPERATURE_DOT_Y_CRD);
+    mlcd.displayJpgImageCoordinate(WBGT_DEGREE_IMG_PATH, WBGT_DEGREE_X_CRD, WBGT_DEGREE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(WBGT_HUMIDITY_IMG_PATH, WBGT_HUMIDITY_X_CRD, WBGT_HUMIDITY_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, WBGT_HUMIDITY_DOT_X_CRD, WBGT_HUMIDITY_DOT_Y_CRD);
+    mlcd.displayJpgImageCoordinate(WBGT_PERCENT_IMG_PATH, WBGT_PERCENT_X_CRD, WBGT_PERCENT_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, WBGT_BACK_X_CRD, WBGT_BACK_Y_CRD);
 }
 
 void AppControl::displayTempHumiIndex()
 {
+    
 }
 
 void AppControl::displayMusicInit()
@@ -172,12 +180,126 @@ void AppControl::displayMusicPlay()
 {
 }
 
-void AppControl::displayMeasureInit()
-{
+void AppControl::displayMeasureInit(){
+    mlcd.displayJpgImageCoordinate(MEASURE_NOTICE_IMG_PATH, MEASURE_NOTICE_X_CRD, MEASURE_NOTICE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MEASURE_BACK_X_CRD, MEASURE_BACK_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, MEASURE_DOT_X_CRD, MEASURE_DOT_Y_CRD);
+    mlcd.displayJpgImageCoordinate(MEASURE_CM_IMG_PATH, MEASURE_CM_X_CRD, MEASURE_CM_Y_CRD);
+    displayMeasureDistance();
 }
 
-void AppControl::displayMeasureDistance()
-{
+void AppControl::displayMeasureDistance(){
+    double distance = mmdist.getDistance();
+    if(distance > 400){
+        distance = 0;
+    }
+    int dist = int(distance * 10);
+    String str =  String(dist);
+    int length = str.length();
+    int i, j;
+    char temp;
+    
+    for (i = 0, j = length - 1; i < j; i++, j--) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+    switch(str.charAt(0)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
+        break;
+        }
+    switch(str.charAt(1)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
+        break;
+        }
+    switch(str.charAt(2)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
+        break;
+        }
+    switch(str.charAt(3)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
+        break;
+        }
 }
 
 void AppControl::displayDateInit()
@@ -224,6 +346,7 @@ void AppControl::controlApplication()
             case ENTRY:
                 mlcd.fillBackgroundWhite();
                 displayMenuInit();
+                setFocusState(MENU_WBGT);
                 setStateMachine(MENU, DO);
                 break;
 
@@ -287,10 +410,18 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
-                
+                mwbgt.init();
+                mlcd.fillBackgroundWhite();
+                displayWBGTInit();
+                setStateMachine(WBGT, DO);
                 break;
 
             case DO:
+                double* temperature;
+                double* humidity;
+                WbgtIndex* index;
+                mwbgt.getWBGT(temperature, humidity, index);
+                displayTempHumiIndex();
                 break;
 
             case EXIT:
@@ -341,12 +472,22 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
+                mlcd.fillBackgroundWhite();
+                displayMeasureInit();
+                setStateMachine(MEASURE, DO);
                 break;
 
             case DO:
+                delay(250);
+                displayMeasureDistance();
+                if(m_flag_btnB_is_pressed){;
+                    setStateMachine(MEASURE, EXIT);
+                    setBtnAllFlgFalse();
+                }
                 break;
 
             case EXIT:
+                setStateMachine(MENU, ENTRY);
                 break;
 
             default:

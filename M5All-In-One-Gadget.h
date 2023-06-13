@@ -97,10 +97,40 @@
 #define MENU_UP_X_CRD 0
 #define MENU_UP_Y_CRD 200
 // WBGT jpg image coordinate
+#define WBGT_TEMPERATURE_X_CRD 0
+#define WBGT_TEMPERATURE_Y_CRD 0
+#define WBGT_TEMPERATURE_DOT_X_CRD 186
+#define WBGT_TEMPERATURE_DOT_Y_CRD 0
+#define WBGT_DEGREE_X_CRD 253
+#define WBGT_DEGREE_Y_CRD 0
+#define WBGT_HUMIDITY_X_CRD 0
+#define WBGT_HUMIDITY_Y_CRD 50
+#define WBGT_HUMIDITY_DOT_X_CRD 186
+#define WBGT_HUMIDITY_DOT_Y_CRD 50
+#define WBGT_PERCENT_X_CRD 253
+#define WBGT_PERCENT_Y_CRD 50
+#define WBGT_BACK_X_CRD 120
+#define WBGT_BACK_Y_CRD 200
 
 // Music jpg image coordinate
 
 // Measure jpg image coordinate
+#define MEASURE_NOTICE_X_CRD 0
+#define MEASURE_NOTICE_Y_CRD 0
+#define MEASURE_BACK_X_CRD 120
+#define MEASURE_BACK_Y_CRD 200
+#define MEASURE_CM_X_CRD 240
+#define MEASURE_CM_Y_CRD 100
+#define MEASURE_m00_X_CRD 10
+#define MEASURE_m00_Y_CRD 100
+#define MEASURE_m0_X_CRD 53
+#define MEASURE_m0_Y_CRD 100
+#define MEASURE_m_X_CRD 96
+#define MEASURE_m_Y_CRD 100
+#define MEASURE_DOT_X_CRD 139
+#define MEASURE_DOT_Y_CRD 100
+#define MEASURE_0m_X_CRD 182
+#define MEASURE_0m_Y_CRD 100
 
 // Date jpg image coordinate
 
