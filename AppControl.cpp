@@ -287,7 +287,7 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
-
+                
                 break;
 
             case DO:

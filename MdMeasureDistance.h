@@ -1,8 +1,10 @@
 /* インクルードガード */
 #pragma once
 
-class MdMeasureDistance // classの定義
+class MdMeasureDistance
 {
-private: // privateはクラス内からしかアクセスできない
-public: // publicはどこからでもアクセス可能
+private:
+
+public:
+double getDistance();
 };
