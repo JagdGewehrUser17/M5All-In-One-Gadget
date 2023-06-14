@@ -342,8 +342,18 @@ void AppControl::displayTempHumiIndex()
 
 void AppControl::displayMusicInit()
 {
+    if(m_mu_play_flg){
+        mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
+        mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+    }else{
+        mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
+        mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+    }
 }
-
 void AppControl::displayMusicStop()
 {
 }
@@ -507,12 +517,12 @@ void AppControl::controlApplication()
             case DO:
                 if(m_flag_btnA_is_pressed || m_flag_btnB_is_pressed || m_flag_btnC_is_pressed){
                     setStateMachine(TITLE, EXIT);
+                    setBtnAllFlgFalse();
                 }
                 
                 break;
 
             case EXIT:
-                setBtnAllFlgFalse();
                 setStateMachine(MENU, ENTRY);
                 break;
 
@@ -534,7 +544,7 @@ void AppControl::controlApplication()
 
             case DO:
                 if(m_flag_btnA_is_pressed){
-                    getFocusState();
+                    
                     if(m_focus_state == MENU_WBGT){
                         focusChangeImg(m_focus_state, MENU_DATE);
                         setFocusState(MENU_DATE);
@@ -551,7 +561,7 @@ void AppControl::controlApplication()
                 }else if(m_flag_btnB_is_pressed){
                     setStateMachine(MENU, EXIT);
                 }else if(m_flag_btnC_is_pressed){
-                    getFocusState();
+                    
                     if(m_focus_state == MENU_WBGT){
                         focusChangeImg(m_focus_state, MENU_MUSIC);
                         setFocusState(MENU_MUSIC);
@@ -570,7 +580,6 @@ void AppControl::controlApplication()
                 break;
 
             case EXIT:
-                getFocusState();
                 if(m_focus_state == MENU_WBGT){
                     setStateMachine(WBGT, ENTRY);
                 }else if(m_focus_state == MENU_MUSIC){
@@ -601,7 +610,7 @@ void AppControl::controlApplication()
             case DO:
                 delay(200);
                 displayTempHumiIndex();
-                if(m_flag_btnB_is_pressed){;
+                if(m_flag_btnB_is_pressed){
                     setStateMachine(MEASURE, EXIT);
                     setBtnAllFlgFalse();
                 }
@@ -620,12 +629,35 @@ void AppControl::controlApplication()
         case MUSIC_STOP:
             switch (getAction()) {
             case ENTRY:
+                mlcd.fillBackgroundWhite();
+                displayMusicInit();
+                setStateMachine(MUSIC_STOP, DO);
                 break;
 
             case DO:
+                if(m_flag_btnA_is_pressed){
+                    m_mu_play_flg = true;
+                    setStateMachine(MUSIC_STOP, EXIT);
+                    setBtnAllFlgFalse();
+                }
+                if(m_flag_btnC_is_pressed){
+                    mmplay.selectNextMusic();
+                    mlcd.displayText("             ", MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+                    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+                    setBtnAllFlgFalse();
+                }
+                if(m_flag_btnB_is_pressed){
+                    setStateMachine(MUSIC_STOP, EXIT);
+                    setBtnAllFlgFalse();
+                }
                 break;
 
             case EXIT:
+                if(m_mu_play_flg){
+                    setStateMachine(MUSIC_PLAY, ENTRY);
+                }else{
+                    setStateMachine(MENU, ENTRY);
+                }
                 break;
 
             default:
@@ -638,12 +670,27 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
+                mlcd.fillBackgroundWhite();
+                displayMusicInit();
+                setStateMachine(MUSIC_PLAY, DO);
+                mmplay.prepareMP3();
                 break;
 
             case DO:
+                m_mu_play_flg = mmplay.isRunningMP3();
+                m_mu_play_flg = mmplay.playMP3();
+                if(m_flag_btnA_is_pressed){
+                    m_mu_play_flg = false;
+                }
+                if(!m_mu_play_flg){
+                    mmplay.stopMP3();
+                    setStateMachine(MUSIC_PLAY, EXIT);
+                }
                 break;
 
             case EXIT:
+                setBtnAllFlgFalse();
+                setStateMachine(MUSIC_STOP, ENTRY);
                 break;
 
             default:
@@ -664,7 +711,7 @@ void AppControl::controlApplication()
             case DO:
                 delay(250);
                 displayMeasureDistance();
-                if(m_flag_btnB_is_pressed){;
+                if(m_flag_btnB_is_pressed){
                     setStateMachine(MEASURE, EXIT);
                     setBtnAllFlgFalse();
                 }

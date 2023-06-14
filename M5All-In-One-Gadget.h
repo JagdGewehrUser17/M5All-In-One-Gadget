@@ -127,6 +127,16 @@
 #define WBGT_Y_CRD 100
 
 // Music jpg image coordinate
+#define MUSIC_NOTICE_X_CRD 0
+#define MUSIC_NOTICE_Y_CRD 0
+#define MUSIC_TITLE_X_CRD 10
+#define MUSIC_TITLE_Y_CRD 120
+#define MUSIC_PLAY_STOP_X_CRD 0
+#define MUSIC_PLAY_STOP_Y_CRD 200
+#define MUSIC_BACK_X_CRD 120
+#define MUSIC_BACK_Y_CRD 200
+#define MUSIC_NEXT_X_CRD 240
+#define MUSIC_NEXT_Y_CRD 200
 
 // Measure jpg image coordinate
 #define MEASURE_NOTICE_X_CRD 0
