@@ -10,9 +10,7 @@ void MdWBGTMonitor::init(){
 
 void MdWBGTMonitor::getWBGT(double* temperature, double* humidity, WbgtIndex* index){
     dthsen.getTempHumi(temperature, humidity);
-    double tem = *temperature;
-    double hum = *humidity;
-    int calc_index = 0.68 * tem + 0.12 * hum;
+    int calc_index = 0.68 * (*temperature) + 0.12 * (*humidity);
     if(calc_index <= 15){
         *index = SAFE;
     }else if(calc_index > 15 && calc_index <= 24){

@@ -21,6 +21,12 @@ private: // privateはクラス内からしかアクセスできない
 
     /* GUI State */
     FocusState m_focus_state = MENU_WBGT;
+    WbgtIndex in = SAFE;
+    double te;
+    double hu;
+    double* temperature = &te;
+    double* humidity = &hu;
+    WbgtIndex* index = &in;
 
 public: // publicはどこからでもアクセス可能
     State getState();

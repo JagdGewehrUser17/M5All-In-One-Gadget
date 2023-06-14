@@ -157,7 +157,187 @@ void AppControl::displayWBGTInit()
 
 void AppControl::displayTempHumiIndex()
 {
+    mwbgt.getWBGT(temperature, humidity, index);
+    int temp = int(*temperature * 10);
+    String str_temp =  String(temp);
+    int length_tem = str_temp.length();
+    int i_tem, j_tem;
+    char tem;
     
+    for (i_tem = 0, j_tem = length_tem - 1; i_tem < j_tem; i_tem++, j_tem--) {
+        tem = str_temp[i_tem];
+        str_temp[i_tem] = str_temp[j_tem];
+        str_temp[j_tem] = tem;
+    }
+    switch(str_temp.charAt(0)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_ORANGE0_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_ORANGE1_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_ORANGE2_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_ORANGE3_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_ORANGE4_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_ORANGE5_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_ORANGE6_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_ORANGE7_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_ORANGE8_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_ORANGE9_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_ORANGEFILLWHITE_IMG_PATH, WBGT_TEMPERATURE_0t_X_CRD, WBGT_TEMPERATURE_0t_Y_CRD);
+        break;
+        }
+    switch(str_temp.charAt(1)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_ORANGE0_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_ORANGE1_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_ORANGE2_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_ORANGE3_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_ORANGE4_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_ORANGE5_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_ORANGE6_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_ORANGE7_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_ORANGE8_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_ORANGE9_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_ORANGE0_IMG_PATH, WBGT_TEMPERATURE_t_X_CRD, WBGT_TEMPERATURE_t_Y_CRD);
+        break;
+        }
+    switch(str_temp.charAt(2)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_ORANGE0_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_ORANGE1_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_ORANGE2_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_ORANGE3_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_ORANGE4_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_ORANGE5_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_ORANGE6_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_ORANGE7_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_ORANGE8_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_ORANGE9_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_ORANGEFILLWHITE_IMG_PATH, WBGT_TEMPERATURE_t0_X_CRD, WBGT_TEMPERATURE_t0_Y_CRD);
+        break;
+        }
+    int humi = int(*humidity * 10);
+    String str_humi =  String(humi);
+    int length_hum = str_humi.length();
+    int i_hum, j_hum;
+    char hum;
+    
+    for (i_hum = 0, j_hum = length_hum - 1; i_hum < j_hum; i_hum++, j_hum--) {
+        hum = str_humi[i_hum];
+        str_humi[i_hum] = str_humi[j_hum];
+        str_humi[j_hum] = hum;
+    }
+    switch(str_humi.charAt(0)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, WBGT_HUMIDITY_0h_X_CRD, WBGT_HUMIDITY_0h_Y_CRD);
+        break;
+        }
+    switch(str_humi.charAt(1)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, WBGT_HUMIDITY_h_X_CRD, WBGT_HUMIDITY_h_Y_CRD);
+        break;
+        }
+    switch(str_humi.charAt(2)){
+        case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '2': mlcd.displayJpgImageCoordinate(COMMON_BLUE2_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '3': mlcd.displayJpgImageCoordinate(COMMON_BLUE3_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '4': mlcd.displayJpgImageCoordinate(COMMON_BLUE4_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '5': mlcd.displayJpgImageCoordinate(COMMON_BLUE5_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '6': mlcd.displayJpgImageCoordinate(COMMON_BLUE6_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '7': mlcd.displayJpgImageCoordinate(COMMON_BLUE7_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '8': mlcd.displayJpgImageCoordinate(COMMON_BLUE8_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        case '9': mlcd.displayJpgImageCoordinate(COMMON_BLUE9_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, WBGT_HUMIDITY_h0_X_CRD, WBGT_HUMIDITY_h0_Y_CRD);
+        break;
+        }
+    switch(*index){
+        case SAFE: mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
+        break;
+        case ATTENTION: mlcd.displayJpgImageCoordinate(WBGT_ATTENTION_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
+        break;
+        case ALERT: mlcd.displayJpgImageCoordinate(WBGT_ALERT_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
+        break;
+        case HIGH_ALERT: mlcd.displayJpgImageCoordinate(WBGT_HIGH_ALERT_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
+        break;
+        case DANGER: mlcd.displayJpgImageCoordinate(WBGT_DANGER_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
+        break;
+        default:
+        break;
+        }
 }
 
 void AppControl::displayMusicInit()
@@ -312,6 +492,8 @@ void AppControl::displayDateUpdate()
 
 void AppControl::controlApplication()
 {
+    mmplay.init();
+
     while (1) {
 
         switch (getState()) {
@@ -417,14 +599,16 @@ void AppControl::controlApplication()
                 break;
 
             case DO:
-                double* temperature;
-                double* humidity;
-                WbgtIndex* index;
-                mwbgt.getWBGT(temperature, humidity, index);
+                delay(200);
                 displayTempHumiIndex();
+                if(m_flag_btnB_is_pressed){;
+                    setStateMachine(MEASURE, EXIT);
+                    setBtnAllFlgFalse();
+                }
                 break;
 
             case EXIT:
+                setStateMachine(MENU, ENTRY);
                 break;
 
             default:
