@@ -621,7 +621,7 @@ void AppControl::controlApplication()
             case DO:
                 displayTempHumiIndex();
                 if(m_flag_btnB_is_pressed){
-                    setStateMachine(MEASURE, EXIT);
+                    setStateMachine(WBGT, EXIT);
                     setBtnAllFlgFalse();
                 }
                 break;
