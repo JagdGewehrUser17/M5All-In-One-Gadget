@@ -99,6 +99,7 @@ void AppControl::displayTitleInit()
 
 void AppControl::displayMenuInit()
 {
+    mlcd.fillBackgroundWhite();
     mlcd.displayJpgImageCoordinate(MENU_WBGT_FOCUS_IMG_PATH, MENU_WBGT_X_CRD, MENU_WBGT_Y_CRD);
     mlcd.displayJpgImageCoordinate(MENU_MUSIC_IMG_PATH, MENU_MUSIC_X_CRD, MENU_MUSIC_Y_CRD);
     mlcd.displayJpgImageCoordinate(MENU_MEASURE_IMG_PATH, MENU_MEASURE_X_CRD, MENU_MEASURE_Y_CRD);
@@ -146,6 +147,7 @@ void AppControl::focusChangeImg(FocusState current_state, FocusState next_state)
 
 void AppControl::displayWBGTInit()
 {
+    mlcd.fillBackgroundWhite();
     mlcd.displayJpgImageCoordinate(WBGT_TEMPERATURE_IMG_PATH, WBGT_TEMPERATURE_X_CRD, WBGT_TEMPERATURE_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_ORANGEDOT_IMG_PATH, WBGT_TEMPERATURE_DOT_X_CRD, WBGT_TEMPERATURE_DOT_Y_CRD);
     mlcd.displayJpgImageCoordinate(WBGT_DEGREE_IMG_PATH, WBGT_DEGREE_X_CRD, WBGT_DEGREE_Y_CRD);
@@ -338,39 +340,42 @@ void AppControl::displayTempHumiIndex()
         default:
         break;
         }
+        delay(200);
 }
 
 void AppControl::displayMusicInit()
 {
-    if(m_mu_play_flg){
-        mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
-        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
-        mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
-    }else{
-        mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
-        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
-        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
-        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
-        mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
-    }
+    mlcd.fillBackgroundWhite();
 }
 void AppControl::displayMusicStop()
 {
+   mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD); 
 }
 
 void AppControl::displayMusicTitle()
 {
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
 }
 
 void AppControl::displayNextMusic()
 {
+    mmplay.selectNextMusic();
+    mlcd.displayText("             ", MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
 }
 
 void AppControl::displayMusicPlay()
 {
+    mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAY_STOP_X_CRD, MUSIC_PLAY_STOP_Y_CRD);
 }
 
 void AppControl::displayMeasureInit(){
+    mlcd.fillBackgroundWhite();
     mlcd.displayJpgImageCoordinate(MEASURE_NOTICE_IMG_PATH, MEASURE_NOTICE_X_CRD, MEASURE_NOTICE_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MEASURE_BACK_X_CRD, MEASURE_BACK_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, MEASURE_DOT_X_CRD, MEASURE_DOT_Y_CRD);
@@ -384,17 +389,17 @@ void AppControl::displayMeasureDistance(){
         distance = 0;
     }
     int dist = int(distance * 10);
-    String str =  String(dist);
-    int length = str.length();
-    int i, j;
-    char temp;
+    String str_dis =  String(dist);
+    int length = str_dis.length();
+    int i_dis, j_dis;
+    char dis;
     
-    for (i = 0, j = length - 1; i < j; i++, j--) {
-        temp = str[i];
-        str[i] = str[j];
-        str[j] = temp;
+    for (i_dis = 0, j_dis = length - 1; i_dis < j_dis; i_dis++, j_dis--) {
+        dis = str_dis[i_dis];
+        str_dis[i_dis] = str_dis[j_dis];
+        str_dis[j_dis] = dis;
     }
-    switch(str.charAt(0)){
+    switch(str_dis.charAt(0)){
         case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
         break;
         case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
@@ -418,7 +423,7 @@ void AppControl::displayMeasureDistance(){
         default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_0m_X_CRD, MEASURE_0m_Y_CRD);
         break;
         }
-    switch(str.charAt(1)){
+    switch(str_dis.charAt(1)){
         case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
         break;
         case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
@@ -442,7 +447,7 @@ void AppControl::displayMeasureDistance(){
         default: mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m_X_CRD, MEASURE_m_Y_CRD);
         break;
         }
-    switch(str.charAt(2)){
+    switch(str_dis.charAt(2)){
         case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
         break;
         case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
@@ -466,7 +471,7 @@ void AppControl::displayMeasureDistance(){
         default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_m0_X_CRD, MEASURE_m0_Y_CRD);
         break;
         }
-    switch(str.charAt(3)){
+    switch(str_dis.charAt(3)){
         case '0': mlcd.displayJpgImageCoordinate(COMMON_BLUE0_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
         break;
         case '1': mlcd.displayJpgImageCoordinate(COMMON_BLUE1_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
@@ -490,14 +495,21 @@ void AppControl::displayMeasureDistance(){
         default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, MEASURE_m00_X_CRD, MEASURE_m00_Y_CRD);
         break;
         }
+        delay(250);
 }
 
 void AppControl::displayDateInit()
 {
+    mlcd.fillBackgroundWhite();
+    mlcd.displayJpgImageCoordinate(DATE_NOTICE_IMG_PATH, DATE_NOTICE_X_CRD, DATE_NOTICE_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, DATE_BACK_X_CRD, DATE_BACK_Y_CRD);
 }
 
 void AppControl::displayDateUpdate()
 {
+    mlcd.displayDateText(mdtime.readDate(), DATE_YEAR_X_CRD, DATE_YEAR_Y_CRD);
+    mlcd.displayDateText(mdtime.readTime(), DATE_TIME_X_CRD, DATE_TIME_Y_CRD);
+    delay(100);
 }
 
 void AppControl::controlApplication()
@@ -536,7 +548,6 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
-                mlcd.fillBackgroundWhite();
                 displayMenuInit();
                 setFocusState(MENU_WBGT);
                 setStateMachine(MENU, DO);
@@ -602,13 +613,12 @@ void AppControl::controlApplication()
             switch (getAction()) {
             case ENTRY:
                 mwbgt.init();
-                mlcd.fillBackgroundWhite();
                 displayWBGTInit();
+                displayTempHumiIndex();
                 setStateMachine(WBGT, DO);
                 break;
 
             case DO:
-                delay(200);
                 displayTempHumiIndex();
                 if(m_flag_btnB_is_pressed){
                     setStateMachine(MEASURE, EXIT);
@@ -629,8 +639,9 @@ void AppControl::controlApplication()
         case MUSIC_STOP:
             switch (getAction()) {
             case ENTRY:
-                mlcd.fillBackgroundWhite();
                 displayMusicInit();
+                displayMusicStop();
+                displayMusicTitle();
                 setStateMachine(MUSIC_STOP, DO);
                 break;
 
@@ -641,9 +652,7 @@ void AppControl::controlApplication()
                     setBtnAllFlgFalse();
                 }
                 if(m_flag_btnC_is_pressed){
-                    mmplay.selectNextMusic();
-                    mlcd.displayText("             ", MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
-                    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);
+                    displayNextMusic();
                     setBtnAllFlgFalse();
                 }
                 if(m_flag_btnB_is_pressed){
@@ -670,8 +679,8 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
-                mlcd.fillBackgroundWhite();
                 displayMusicInit();
+                displayMusicPlay();
                 setStateMachine(MUSIC_PLAY, DO);
                 mmplay.prepareMP3();
                 break;
@@ -703,13 +712,12 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
-                mlcd.fillBackgroundWhite();
                 displayMeasureInit();
+                displayMeasureDistance();
                 setStateMachine(MEASURE, DO);
                 break;
 
             case DO:
-                delay(250);
                 displayMeasureDistance();
                 if(m_flag_btnB_is_pressed){
                     setStateMachine(MEASURE, EXIT);
@@ -731,12 +739,21 @@ void AppControl::controlApplication()
 
             switch (getAction()) {
             case ENTRY:
+                displayDateInit();
+                displayDateUpdate();
+                setStateMachine(DATE, DO);
                 break;
 
             case DO:
+                displayDateUpdate();
+                if(m_flag_btnB_is_pressed){
+                    setStateMachine(DATE, EXIT);
+                    setBtnAllFlgFalse();
+                }
                 break;
 
             case EXIT:
+                setStateMachine(MENU, ENTRY);
                 break;
 
             default:
