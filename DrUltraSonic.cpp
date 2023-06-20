@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include "M5All-In-One-Gadget.h"
 #include "DrUltraSonic.h"
 
 DrUltraSonic::DrUltraSonic(int echo_pin, int trig_pin){
@@ -11,6 +10,9 @@ DrUltraSonic::DrUltraSonic(int echo_pin, int trig_pin){
 
 double DrUltraSonic::measureReturnTime(){
     double t = 0;
-    t = pulseIn(m_echo_pin, HIGH, 2000000);
+    digitalWrite(m_trig_pin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(m_trig_pin, LOW);
+    t = pulseIn(m_echo_pin, HIGH);
     return t;
 }
