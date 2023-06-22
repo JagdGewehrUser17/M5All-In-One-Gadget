@@ -155,12 +155,13 @@ void AppControl::displayWBGTInit()
     mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, WBGT_HDOT_X_CRD, WBGT_HDOT_Y_CRD);
     mlcd.displayJpgImageCoordinate(WBGT_PERCENT_IMG_PATH, WBGT_PERCENT_X_CRD, WBGT_PERCENT_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, WBGT_BACK_X_CRD, WBGT_BACK_Y_CRD);
+    displayTempHumiIndex();
 }
 
 void AppControl::displayTempHumiIndex()
 {
-    mwbgt.getWBGT(temperature, humidity, index);
-    int temp = int(*temperature * 10);
+    mwbgt.getWBGT(&m_temperature, &m_humidity, &m_index);
+    int temp = int(m_temperature * 10);
     String str_temp =  String(temp);
     int length_tem = str_temp.length();
     int i_tem, j_tem;
@@ -243,7 +244,7 @@ void AppControl::displayTempHumiIndex()
         default: mlcd.displayJpgImageCoordinate(COMMON_ORANGEFILLWHITE_IMG_PATH, WBGT_T2DIGIT_X_CRD, WBGT_T2DIGIT_Y_CRD);
         break;
         }
-    int humi = int(*humidity * 10);
+    int humi = int(m_humidity * 10);
     String str_humi =  String(humi);
     int length_hum = str_humi.length();
     int i_hum, j_hum;
@@ -326,7 +327,7 @@ void AppControl::displayTempHumiIndex()
         default: mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, WBGT_H2DIGIT_X_CRD, WBGT_H2DIGIT_Y_CRD);
         break;
         }
-    switch(*index){
+    switch(m_index){
         case SAFE: mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
         break;
         case ATTENTION: mlcd.displayJpgImageCoordinate(WBGT_ATTENTION_IMG_PATH, WBGT_X_CRD, WBGT_Y_CRD);
@@ -614,7 +615,6 @@ void AppControl::controlApplication()
             case ENTRY:
                 mwbgt.init();
                 displayWBGTInit();
-                displayTempHumiIndex();
                 setStateMachine(WBGT, DO);
                 break;
 

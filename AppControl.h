@@ -22,12 +22,9 @@ private: // privateはクラス内からしかアクセスできない
     /* GUI State */
     FocusState m_focus_state = MENU_WBGT;
 
-    WbgtIndex m_in = SAFE;
-    double m_te;
-    double m_hu;
-    WbgtIndex* index = &m_in;
-    double* temperature = &m_te;
-    double* humidity = &m_hu;
+    WbgtIndex m_index = SAFE;
+    double m_temperature;
+    double m_humidity;
     
     bool m_mu_play_flg = false;
 
